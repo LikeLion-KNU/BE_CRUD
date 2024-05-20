@@ -9,8 +9,8 @@
     - **요청 본문**:
         ```json
         {
-          "name": "string",
-          "password": "string",
+          "name": "string", not null
+          "password": "string", not null
           "age": "int",
           "role": "ADMIN, USER",
           "email": "string",
