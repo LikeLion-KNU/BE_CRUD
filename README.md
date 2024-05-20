@@ -29,7 +29,7 @@
     - **응답**: `MemberResponseDto 객체 리스트 반환`
 3. **회원ID를 이용하여 조희**
     - **엔드포인트**: `GET /api/members/{id}`
-    - **설명**: `회원의 아이디를 이용하여 조회`
+    - **설명**: `회원의 ID를 이용하여 조회`
     - **요청 본문**:
         ```json
         NONE
@@ -37,7 +37,7 @@
     - **응답**: `MemberResponseDto 객체 반환`
 3. **회원 정보 수정**
     - **엔드포인트**: `PUT /api/members/{id}`
-    - **설명**: `회원의 아이디를 이용하여 수정`
+    - **설명**: `회원의 ID를 이용하여 수정`
     - **요청 본문**:
         ```json
 	    {
@@ -50,7 +50,7 @@
     - **응답**: `Long member_id 반환`
 4. **회원 ID를 이용하여 삭제**
     - **엔드포인트**: `DELETE /api/members/{id}`
-    - **설명**: `회원의 아이디를 이용하여 삭제`
+    - **설명**: `회원의 ID를 이용하여 삭제`
     - **요청 본문**:
         ```json
 	    NONE
@@ -79,7 +79,7 @@
     - **응답**: `CouponResponseDto 객체 리스트 반환`
 3. **쿠폰 정보 수정**
     - **엔드포인트**: `PUT -> /api/coupons/{id}`
-    - **설명**: `쿠폰의 아이디를 사용하여 수정`
+    - **설명**: `쿠폰의 ID를 사용하여 수정`
     - **요청 본문**:
         ```json
         {
@@ -115,7 +115,7 @@
         ```
     - **응답**: `CouponHoldersResponseDto 객체 반환`
 3. **회원ID로 해당 회원이 보유하고 있는 쿠폰 조회**
-    - **엔드포인트**: `POST -> /api/memberCoupon/member/{id}`
+    - **엔드포인트**: `GET -> /api/memberCoupon/member/{id}`
     - **설명**: `회원의 ID를 사용하여 보유한 쿠폰을 반환`
     - **요청 본문**:
         ```json
@@ -123,7 +123,7 @@
         ```
     - **응답**: `CouponHoldersResponseDto 객체 리스트 반환`
 4. **쿠폰ID로 해당 회원이 보유하고 있는 쿠폰 조회**
-    - **엔드포인트**: `POST -> /api/memberCoupon/coupon/{id}`
+    - **엔드포인트**: `GET -> /api/memberCoupon/coupon/{id}`
     - **설명**: `쿠폰의 ID를 사용하여 보유한 쿠폰을 반환`
     - **요청 본문**:
         ```json
