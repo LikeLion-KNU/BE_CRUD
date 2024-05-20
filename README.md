@@ -1,4 +1,4 @@
-# 🦁 12th LIKELION CRUD
+# 🦁 12th LIKELION CRUD Assignment
 
 ## 📮 진행 방법
 ### 1. 로컬 환경 (바탕화면 등...)에 클론 진행 및 해당 디렉토리 진입
@@ -72,5 +72,8 @@ git push origin Team_0_name
     - **응답**: Member 객체 리스트.
 3. ... (위와 같은 형식으로 만들어 주시면 됩니다!)
 ---
-### 5. CRUD 모든 기능 push 및 API 명세서 작성시 끝!
+### 5. 노션에 본인 브랜치 URL 제출
+✅ [본인 브랜치 URL 제출 링크](https://www.notion.so/CRUD-f59053587cd74f4ab5fca7841d5fac83?pvs=4)
+
+### 6. 끝~!
 <img width="250" alt="Untitled" src="https://cdn.sketchpan.com/member/e/exosm12/draw/1454491678758/0.png">
