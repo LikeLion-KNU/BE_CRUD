@@ -87,7 +87,7 @@
         ```
     - **응답**: `Long couponId 반환`
 4. **쿠폰 삭제**
-    - **엔드포인트**: `DELETE -> /coupon/delete/{memberId}`
+    - **엔드포인트**: `DELETE -> /coupon/delete/{couponId}`
     - **설명**: `쿠폰의 ID를 사용하여 삭제`
     - **요청 본문**:
         ```json
