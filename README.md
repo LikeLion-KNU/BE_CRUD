@@ -1,79 +1,148 @@
 # 🦁 12th LIKELION CRUD Assignment
 
-## 📮 진행 방법
-### 1. 로컬 환경 (바탕화면 등...)에 클론 진행 및 해당 디렉토리 진입
-```BASH
-# 다운로드
-git clone https://github.com/LikeLion-KNU/BE_CRUD
-
-# 해당 디렉토리 진입
-cd BE_CRUD
-```
-### 2. 브랜치 생성: Team_팀번호_이름 - (ex. Team_0_jiwoong)
-  - 아이디어톤 팀 번호로 진행 (나중에 제출확인 용이하게 하기 위함.)
-```BASH
-# 브랜치 생성
-git branch Team_0_name
-
-# 생성한 브랜치로 이동
-git checkout Team_0_name
-
-# 현재 브랜치 확인
-git branch
-```
-### 3. 스프링 MYSQL 연결 & JPA를 활용한 아래 ERD CRUD구현
-
-<img width="1000" alt="Untitled" src="https://github.com/LikeLion-KNU/BE_CRUD/assets/100078615/c3266d25-7167-4766-b791-6a1ab0f4b194">
-
-   - MYSQL은 로컬 환경에서 쓰시는 방법대로 해주시면 됩니다!
-   - 본인 브랜치에 중간중간 ```commit```을 남겨주세요!
-   - ```commit convention```은 하고싶으신대로 해주세요.
-> ‼️ 꼭 ```commit```하시고 본인 브랜치에 ```push```해주셔야합니다 ‼️
-```bash
-# 본인 브랜치에 push
-git push origin Team_0_name
-```
-### 4. CRUD 완료시 아래 형식에 맞춰서 API 명세서 작성
-> Entity(해당 Entity name) API
-> 1. 기능명
-> + 엔드 포인트 : 
-> + 설명 : 
-> + 요청 본문 :
-> ```json
->{
->   "entity": "type",
->}
-> ```
-> + 응답 : 
----
-> 아래의 예시 형식을 지우고, ```markdown```으로 작성해주세요.
-
-**EX )**
 ### Member API
 1. **회원 생성**
-    - **엔드포인트**: `POST /members`
-    - **설명**: 새로운 회원을 생성합니다j.
+    - **엔드포인트**: `POST -> /member/save`
+    - **설명**: `회원 생성`
     - **요청 본문**:
         ```json
         {
           "email": "string",
-          "password": "string",
-          "role": "ADMIN 또는 USER",
           "name": "string",
-          "age": "number",
-          "isAccountExpired": "boolean",
-          "isAccountLocked": "boolean"
+          "password": "string",
+          "age": "int",
+          "role" : "USER, ADMIN",
+          "is_account_expired" : "boolean",
+          "is_account_locked" : "boolean",
         }
         ```
-    - **응답**: `member_id`를 포함한 Member 객체.
-2. **모든 회원 조회**
-    - **엔드포인트**: `GET /members`
-    - **설명**: 모든 회원 목록을 조회합니다.
-    - **응답**: Member 객체 리스트.
-3. ... (위와 같은 형식으로 만들어 주시면 됩니다!)
----
-### 5. 노션에 본인 브랜치 URL 제출
-✅ [본인 브랜치 URL 제출 링크](https://www.notion.so/CRUD-f59053587cd74f4ab5fca7841d5fac83?pvs=4)
-
-### 6. 끝~!
-<img width="250" alt="Untitled" src="https://cdn.sketchpan.com/member/e/exosm12/draw/1454491678758/0.png">
+    - **응답**: `Long saveId 반환`
+2. **회원 전체 조희**
+    - **엔드포인트**: `GET /member/information/all`
+    - **설명**: `모든 회원을 조회`
+    - **요청 본문**:
+        ```json
+        NONE
+        ```
+    - **응답**: `MemberAllReadResponse 객체 리스트 반환`
+3. **회원ID를 이용하여 조희**
+    - **엔드포인트**: `GET /member/information/{memberId}`
+    - **설명**: `회원의 ID를 이용하여 조회`
+    - **요청 본문**:
+        ```json
+        NONE
+        ```
+    - **응답**: `MemberIdReadResponse 객체 반환`
+3. **회원 정보 수정**
+    - **엔드포인트**: `PUT /member/update/{memberId}`
+    - **설명**: `회원의 ID를 이용하여 수정`
+    - **요청 본문**:
+        ```json
+	    {
+          "email": "string",
+          "name": "string",
+          "password": "string",
+          "age": "int",
+          "role" : "USER, ADMIN",
+      }
+        ```
+    - **응답**: `updatedMemberEmail 반환`
+4. **회원 ID를 이용하여 삭제**
+    - **엔드포인트**: `DELETE /member/delete/{memberId}`
+    - **설명**: `회원의 ID를 이용하여 삭제`
+    - **요청 본문**:
+        ```json
+	    NONE
+        ```
+    - **응답**: `HttpStatus.OK`
+  
+   
+### COUPON API
+1. **쿠폰 생성**
+    - **엔드포인트**: `POST -> /coupon/save`
+    - **설명**: `쿠폰 생성`
+    - **요청 본문**:
+        ```json
+        {
+          "Type": "PERCENTAGE, FIXED", 
+          "discount": "int",
+          "expirationDate": "yyyy-MM-dd'T'HH:mm:ss",
+          "issueDate" : "yyyy-MM-dd'T'HH:mm:ss"
+        }
+        ```
+    - **응답**: `Long saveId 반환`
+2. **쿠폰 조회**
+    - **엔드포인트**: `GET -> coupon/information/all`
+    - **설명**: `모든 쿠폰을 조회`
+    - **요청 본문**:
+        ```json
+        NONE
+        ```
+    - **응답**: `CouponAllReadResponse 객체 리스트 반환`
+3. **쿠폰 정보 수정**
+    - **엔드포인트**: `PUT -> coupon/update/{couponId}`
+    - **설명**: `쿠폰의 ID를 사용하여 수정`
+    - **요청 본문**:
+        ```json
+        {
+          "Type": "PERCENTAGE, FIXED", 
+          "discount": "int",
+          "expirationDate": "yyyy-MM-dd'T'HH:mm:ss",
+          "issueDate" : "yyyy-MM-dd'T'HH:mm:ss"
+        }
+        ```
+    - **응답**: `Long updateId 반환`
+4. **쿠폰 삭제**
+    - **엔드포인트**: `DELETE -> /coupon/delete/{couponId}`
+    - **설명**: `쿠폰의 ID를 사용하여 삭제`
+    - **요청 본문**:
+        ```json
+        NONE
+        ```
+    - **응답**: `HttpStatus.OK`
+  
+   
+### COUPON HOLDERS API
+1. **특정 회원에게 쿠폰 할당**
+    - **엔드포인트**: `POST -> /couponholder/coupontomember`
+    - **설명**: `회원과 쿠폰의 ID값 2개를 리퀘스트 바디로 받아서 조회 후 할당`
+    - **요청 본문**:
+        ```json
+        {
+          "memberId" : "Long",
+          "couponId" : "Long"
+        }
+        ```
+    - **응답**: `Long saveId 반환`
+2. **모든 쿠폰 보유자 조회**
+    - **엔드포인트**: `GET -> /couponholder/all`
+    - **설명**: `모든 쿠폰 보유자 조회`
+    - **요청 본문**:
+        ```json
+        NONE
+        ```
+    - **응답**: `FindAllMemberWithCouponResponse 객체 리스트 반환`
+3. **회원ID로 해당 회원이 보유하고 있는 쿠폰 조회**
+    - **엔드포인트**: `GET -> /couponholder/couponswithmember/{memberId}`
+    - **설명**: `회원의 ID를 사용하여 보유한 쿠폰을 반환`
+    - **요청 본문**:
+        ```json
+        NONE    
+        ```
+    - **응답**: `FindCouponWithMemberResponse 객체 리스트 반환`
+4. **쿠폰ID로 해당 회원이 보유하고 있는 쿠폰 조회**
+    - **엔드포인트**: `GET -> /couponholder/memberswithcoupon/{couponId}`
+    - **설명**: `쿠폰의 ID를 사용하여 보유한 쿠폰을 반환`
+    - **요청 본문**:
+        ```json
+        NONE
+        ```
+    - **응답**: `FindMemberWithCouponResponse 객체 리스트 반환`
+4. **특정 회원의 쿠폰 삭제**
+    - **엔드포인트**: `DELETE -> /couponholder/delete?memberId= &couponId= `
+    - **설명**: `회원과 쿠폰의 ID값 2개를 쿼리 파라미터로 받아서 조회 후 삭제`
+    - **요청 본문**:
+        ```json
+        NONE
+        ```
+    - **응답**: `HttpStatus.OK`
