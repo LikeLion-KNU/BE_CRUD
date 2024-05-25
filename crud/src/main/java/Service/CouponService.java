@@ -28,11 +28,12 @@ public class CouponService {
 
     @Transactional
     public CouponRegisterResponseDTO registerCoupon(CouponRegisterRequestDTO couponRegisterRequestDTO){
-        Coupon coupon = new Coupon();
-        coupon.setDiscount(couponRegisterRequestDTO.getDiscount());
-        coupon.setType(couponRegisterRequestDTO.getType());
-        coupon.setExpirationDate(couponRegisterRequestDTO.getExpirationDate());
-        coupon.setIssueDate(LocalDateTime.now());
+        Coupon coupon = Coupon.builder()
+                .discount(couponRegisterRequestDTO.getDiscount())
+                .type(couponRegisterRequestDTO.getType())
+                .expirationDate(couponRegisterRequestDTO.getExpirationDate())
+                .issueDate(LocalDateTime.now())
+                .build();
         couponRepository.save(coupon);
         CouponRegisterResponseDTO couponRegisterResponseDTO = new CouponRegisterResponseDTO();
         couponRegisterResponseDTO.update(coupon);

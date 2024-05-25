@@ -2,6 +2,8 @@ package domain;
 
 import dto.coupon.CouponUpdateRequestDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +12,9 @@ import java.util.List;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Coupon {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="coupon_id")

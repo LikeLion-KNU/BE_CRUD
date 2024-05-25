@@ -21,14 +21,15 @@ public class MemberService {
     private final MemberRepository memberRepository;
     @Transactional
     public MemberRegisterResponseDTO registerMember(MemberRegisterRequestDTO memberRegisterRequestDTO){
-        Member member = new Member();
-        member.setAge(memberRegisterRequestDTO.getAge());
-        member.setName(memberRegisterRequestDTO.getName());
-        member.setEmail(memberRegisterRequestDTO.getEmail());
-        member.setPassword(memberRegisterRequestDTO.getPassword());
-        member.setRole(Role.User);
-        member.setAccountExpired(false);
-        member.setAccountLocked(false);
+        Member member = Member.builder()
+                .age(memberRegisterRequestDTO.getAge())
+                .name(memberRegisterRequestDTO.getName())
+                .email(memberRegisterRequestDTO.getEmail())
+                .password(memberRegisterRequestDTO.getPassword())
+                .role(Role.User)
+                .isAccountExpired(false)
+                .isAccountLocked(false)
+                .build();
         memberRepository.save(member);
         MemberRegisterResponseDTO memberRegisterResponseDTO = new MemberRegisterResponseDTO();
         memberRegisterResponseDTO.update(member);
