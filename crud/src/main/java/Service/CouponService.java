@@ -20,12 +20,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class CouponService {
     private final MemberRepository memberRepository;
     private final CouponRepository couponRepository;
     private final CouponHolderRepository couponHolderRepository;
 
+    @Transactional
     public CouponRegisterResponseDTO registerCoupon(CouponRegisterRequestDTO couponRegisterRequestDTO){
         Coupon coupon = new Coupon();
         coupon.setDiscount(couponRegisterRequestDTO.getDiscount());
@@ -40,6 +41,7 @@ public class CouponService {
     public List<Coupon> findAllCoupons(){
         return couponRepository.findAll();
     }
+    @Transactional
     public CouponUpdateResponseDTO editCoupon(Long couponId, CouponUpdateRequestDTO couponUpdateRequestDTO){
         Coupon findCoupon = couponRepository.findById(couponId).orElseThrow();
         findCoupon.update(couponUpdateRequestDTO);
@@ -47,10 +49,11 @@ public class CouponService {
         couponUpdateResponseDTO.update(findCoupon);
         return couponUpdateResponseDTO;
     }
+    @Transactional
     public void deleteCoupon(Long couponId){
         couponRepository.deleteById(couponId);
     }
-
+    @Transactional
     public Long assignCouponToMember(Long memberId, Long couponId) {
         Member member = memberRepository.findById(memberId).orElseThrow();
         Coupon coupon = couponRepository.findById(couponId).orElseThrow();
@@ -75,6 +78,7 @@ public class CouponService {
         }
         return members;
     }
+    @Transactional
     public void deleteCouponFromMember(Long memberId,Long couponId){
         couponHolderRepository.deleteByMemberIdAndCouponId(memberId,couponId);
     }

@@ -21,7 +21,7 @@ public class CouponController {
     /*
     쿠폰 등록
      */
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public CouponRegisterResponseDTO registerCoupon(@RequestBody CouponRegisterRequestDTO couponRegisterRequestDTO){
         return couponService.registerCoupon(couponRegisterRequestDTO);
@@ -45,7 +45,7 @@ public class CouponController {
     /*
     쿠폰 삭제
      */
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{couponId}")
     public void deleteCoupon(@PathVariable Long couponId){
         couponService.deleteCoupon(couponId);
@@ -54,7 +54,7 @@ public class CouponController {
     /*
     특정 회원에게 쿠폰 할당
      */
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/assign/{memberId}/{couponId}")
     public Long assignCouponToMember(@PathVariable Long memberId, @PathVariable Long couponId){
         return couponService.assignCouponToMember(memberId, couponId);
@@ -70,7 +70,7 @@ public class CouponController {
     /*
     특정 회원의 쿠폰 삭제
      */
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{memberId}/{couponId}")
     public void deleteCouponFromMember(@PathVariable Long memberId, @PathVariable Long couponId){
         couponService.deleteCouponFromMember(memberId,couponId);

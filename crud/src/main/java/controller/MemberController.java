@@ -19,7 +19,7 @@ import java.util.Optional;
 public class MemberController {
 
     private final MemberService memberService;
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     /*
     회원 생성
@@ -55,7 +55,7 @@ public class MemberController {
     /*
     회원 ID로 삭제
      */
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteMember(@PathVariable Long id){
         memberService.deleteMember(id);

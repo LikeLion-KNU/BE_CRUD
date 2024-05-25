@@ -16,10 +16,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class MemberService {
     private final MemberRepository memberRepository;
-
+    @Transactional
     public MemberRegisterResponseDTO registerMember(MemberRegisterRequestDTO memberRegisterRequestDTO){
         Member member = new Member();
         member.setAge(memberRegisterRequestDTO.getAge());
@@ -40,6 +40,7 @@ public class MemberService {
     public Optional<Member> findMember(Long id){
         return memberRepository.findById(id);
     }
+    @Transactional
     public MemberUpdateResponseDTO editMember(Long memberId, MemberUpdateRequestDTO memberUpdateDTO){
         Member findMember = memberRepository.findById(memberId).orElseThrow();
         findMember.update(memberUpdateDTO);
@@ -47,6 +48,7 @@ public class MemberService {
         memberUpdateResponseDTO.update(findMember);
         return memberUpdateResponseDTO;
     }
+    @Transactional
     public void deleteMember(Long memberId){
         memberRepository.deleteById(memberId);
     }
