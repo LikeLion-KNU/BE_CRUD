@@ -103,12 +103,11 @@
       }
      ]
 3. **쿠폰 정보 수정**
-   - **엔트포인트**: `PATCH /coupon`
+   - **엔트포인트**: `PATCH /coupon/{couponId}`
    - **설명**: 쿠폰 정보를 수정합니다. (couponType, discount)
    - **요청 본문**
    - ```json
      {
-     "couponId" : "1",
      "couponType" : "PERCENTAGE",
      "discount" : "15"
      }
