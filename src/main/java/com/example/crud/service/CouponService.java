@@ -3,6 +3,7 @@ package com.example.crud.service;
 import com.example.crud.dto.coupon.CreateCouponDto.CreateCouponRequest;
 import com.example.crud.dto.coupon.CreateCouponDto.CreateCouponResponse;
 import com.example.crud.dto.coupon.SimpleCouponDto;
+import com.example.crud.dto.coupon.SimpleCouponHolderDto;
 import com.example.crud.dto.coupon.UpdateCouponDto.UpdateCouponRequest;
 import com.example.crud.dto.coupon.UpdateCouponDto.UpdateCouponResponse;
 import com.example.crud.dto.member.SimpleMemberDto;
@@ -80,10 +81,10 @@ public class CouponService {
                 .collect(Collectors.toList());
     }
 
-    public List<SimpleCouponDto> findAllCouponHolders(){
+    public List<SimpleCouponHolderDto> findAllCouponHolders(){
         return couponHolderRepository.findAll()
                 .stream()
-                .map(SimpleCouponDto::toDtoWithMember)
+                .map(SimpleCouponHolderDto::toDto)
                 .collect(Collectors.toList());
     }
 

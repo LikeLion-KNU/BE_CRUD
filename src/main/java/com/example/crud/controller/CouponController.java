@@ -3,6 +3,7 @@ package com.example.crud.controller;
 import com.example.crud.dto.coupon.CreateCouponDto.CreateCouponRequest;
 import com.example.crud.dto.coupon.CreateCouponDto.CreateCouponResponse;
 import com.example.crud.dto.coupon.SimpleCouponDto;
+import com.example.crud.dto.coupon.SimpleCouponHolderDto;
 import com.example.crud.dto.coupon.UpdateCouponDto.UpdateCouponRequest;
 import com.example.crud.dto.coupon.UpdateCouponDto.UpdateCouponResponse;
 import com.example.crud.dto.member.SimpleMemberDto;
@@ -37,7 +38,7 @@ public class CouponController {
                 .body(null);
     }
 
-    @PostMapping("/delete/{memberId}")
+    @PostMapping("/couponHolder/delete/{memberId}")
     public ResponseEntity<Void> deleteCouponHolder(
             @PathVariable("memberId") Long memberId
     ){
@@ -54,19 +55,19 @@ public class CouponController {
                 .body(couponService.updateCoupon(request));
     }
 
-    @PostMapping("/allocate/{memberId}")
-    public ResponseEntity<Long> allocateCoupon(
-            @PathVariable("memberId") Long memberId,
-            @RequestBody Long couponId
+    @PostMapping("/allocate")
+    public ResponseEntity<Void> allocateCoupon(
+            @RequestParam("memberId") Long memberId,
+            @RequestParam("couponId") Long couponId
     ){
         couponService.allocateCoupon(memberId, couponId);
         return ResponseEntity
                 .status(CREATED)
-                .body(memberId);
+                .body(null);
     }
 
     @GetMapping("/couponHolders")
-    public ResponseEntity<List<SimpleCouponDto>> findAllCouponHolders(){
+    public ResponseEntity<List<SimpleCouponHolderDto>> findAllCouponHolders(){
         return ResponseEntity
                 .status(OK)
                 .body(couponService.findAllCouponHolders());
@@ -88,7 +89,7 @@ public class CouponController {
                 .body(couponService.findCouponsByMember(memberId));
     }
 
-    @GetMapping("/holders/{couponId}")
+    @GetMapping("/couponHolders/{couponId}")
     public ResponseEntity<List<SimpleMemberDto>> findHoldersByCoupon(
             @PathVariable("couponId") Long couponId
     ){
