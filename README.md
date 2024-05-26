@@ -51,26 +51,69 @@ git push origin Team_0_name
 **EX )**
 ### Member API
 1. **회원 생성**
-    - **엔드포인트**: `POST /members`
-    - **설명**: 새로운 회원을 생성합니다j.
+    - **엔드포인트**: `POST /member/create`
+    - **설명**: 새로운 회원을 생성합니다.
     - **요청 본문**:
-        ```json
-        {
-          "email": "string",
-          "password": "string",
-          "role": "ADMIN 또는 USER",
-          "name": "string",
-          "age": "number",
-          "isAccountExpired": "boolean",
-          "isAccountLocked": "boolean"
-        }
-        ```
-    - **응답**: `member_id`를 포함한 Member 객체.
+    ```json
+     {
+     "email":"123123@naver.com",
+     "password":"999",
+     "name":"hello world",
+     "age":"24"
+     }
+  - **응답**: 상태코드) CREATED, `name, role`
+    ```json
+    {
+    "name": "hello world",
+    "role": "USER"
+    }
 2. **모든 회원 조회**
-    - **엔드포인트**: `GET /members`
+    - **엔드포인트**: `GET /member/users`
     - **설명**: 모든 회원 목록을 조회합니다.
-    - **응답**: Member 객체 리스트.
-3. ... (위와 같은 형식으로 만들어 주시면 됩니다!)
+    - **응답**: 상태코드) OK, Member 객체 리스트.
+    ```json
+   [
+     {
+       "age": 24,
+       "name": "hello world"
+     },
+     {
+       "age": 23,
+       "name": "hello world!"
+     }
+   ]
+3. **회원 ID로 조회**
+    - **엔드포인트**: `GET /member/user/{memberId}`
+    - **설명**: 회원 ID로 회원을 조회합니다.
+    - **응답**: 상태코드) OK, 회원 ID에 해당하는 간단 회원 객체
+   ```JSON
+    {
+    "age": 24,
+    "name": "hello word"
+    }
+4. **회원 정보 수정**
+   - **엔트포인트**: `POST /member/update`
+   - **설명**: 회원 정보를 수정합니다. (age, name, email)
+   - **요청 본문**
+     ```json
+     {
+      "memberId":"1",
+      "email":"qwe@gmail.com",
+      "password":"pw123",
+      "name":"name123"
+     }
+   - **응답** : 상태코드) OK
+     ```json
+     {
+      "memberId": 1,
+      "email": "qwe@gmail.com",
+      "password": "pw123",
+      "name": "name123"
+     }
+5. **회원 정보 삭제**
+   - **엔트포인트**: `POST /member/delete/{memberId}`
+   - **설명**: 회원 정보를 삭제합니다.
+   - **응답**: 상태코드) NO_CONTENT
 ---
 ### 5. 노션에 본인 브랜치 URL 제출
 ✅ [본인 브랜치 URL 제출 링크](https://www.notion.so/CRUD-f59053587cd74f4ab5fca7841d5fac83?pvs=4)

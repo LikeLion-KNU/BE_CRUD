@@ -39,12 +39,12 @@ public class MemberController {
                 .body(memberService.updateMember(request));
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<Long> deleteMember(@RequestBody Long memberId){
+    @PostMapping("/delete/{memberId}")
+    public ResponseEntity<Void> deleteMember(@PathVariable("memberId") Long memberId){
         memberService.deleteMember(memberId);
         return ResponseEntity
-                .status(OK)
-                .body(memberId);
+                .status(NO_CONTENT)
+                .body(null);
     }
 
     @GetMapping("/user/{memberId}")
