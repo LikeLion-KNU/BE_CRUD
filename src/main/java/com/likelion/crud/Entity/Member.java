@@ -24,5 +24,5 @@ public class Member {
     private Boolean is_account_locked;
 
     @OneToMany(mappedBy = "member")
-    private List<CouponHolders> CouponHolders = new ArrayList<CouponHolders>();
+    private List<CouponHolders> couponHolders = new ArrayList<>();
 }
