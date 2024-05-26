@@ -1,5 +1,6 @@
 package com.likelion.crud.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long member_id;
+    private Long memberId;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
@@ -23,6 +24,7 @@ public class Member {
     private Boolean is_account_expired;
     private Boolean is_account_locked;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "member")
     private List<CouponHolders> couponHolders = new ArrayList<>();
 }

@@ -1,5 +1,6 @@
 package com.likelion.crud.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,13 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 public class Coupon {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long coupon_id;
+    private Long couponId;
     @Enumerated(EnumType.STRING)
     private CouponType type;
     private int discount;
     private LocalDateTime issue_date;
     private LocalDateTime expiration_date;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "coupon")
     private List<CouponHolders> CouponHolders = new ArrayList<CouponHolders>();
 }
