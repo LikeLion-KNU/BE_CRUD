@@ -1,11 +1,10 @@
 package com.example.BE_Homework.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
+@Builder @AllArgsConstructor
 @Getter @Setter
 @NoArgsConstructor
 public class CouponHolders {

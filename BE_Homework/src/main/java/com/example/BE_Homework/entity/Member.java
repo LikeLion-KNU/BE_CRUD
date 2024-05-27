@@ -2,13 +2,12 @@ package com.example.BE_Homework.entity;
 
 import com.example.BE_Homework.entity.enumType.Role;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
+@Builder @AllArgsConstructor
 @Getter @Setter
 @NoArgsConstructor
 public class Member {
