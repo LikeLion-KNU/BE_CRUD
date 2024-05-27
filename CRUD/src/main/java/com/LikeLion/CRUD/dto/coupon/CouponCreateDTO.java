@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class CouponDTO {
+public class CouponCreateDTO {
 
     private CouponType type;
     private Integer discount;

@@ -1,5 +1,7 @@
 package com.LikeLion.CRUD.controller.member;
 
+import com.LikeLion.CRUD.dto.member.MemberCreateDTO;
+import com.LikeLion.CRUD.dto.member.MemberInfoDTO;
 import com.LikeLion.CRUD.entity.member.Member;
 import com.LikeLion.CRUD.exception.member.MemberNotFoundException;
 import com.LikeLion.CRUD.service.member.MemberService;
@@ -22,32 +24,34 @@ public class MemberController {
     }
 
     // 회원 생성 -> 나중에 DTO 만들어서 id 안받아도되게 수정해보기 까먹지 말자
+    // 수정완~
     @PostMapping
-    public ResponseEntity<Member> createMember(@RequestBody Member member) {
-        Member createdMember = memberService.createMember(member);
+    public ResponseEntity<Member> createMember(@RequestBody MemberCreateDTO memberCreateDTO) {
+        Member createdMember = memberService.createMemberFromDto(memberCreateDTO);
         return new ResponseEntity<>(createdMember, HttpStatus.CREATED);
     }
 
-    // 회원 전체 조회
+    // 회원 전체 조회 -> DTO 사용하는 것으로 바꿈
     @GetMapping
-    public ResponseEntity<List<Member>> getAllMembers() {
-        List<Member> members = memberService.getAllMembers();
-        return new ResponseEntity<>(members, HttpStatus.OK);
+    public ResponseEntity<List<MemberInfoDTO>> getAllMembers() {
+        List<MemberInfoDTO> membersDto = memberService.getAllMembersAsDto();
+        return new ResponseEntity<>(membersDto, HttpStatus.OK);
     }
 
-    // 회원 ID로 조회
+    // 회원 ID로 조회-> DTO 사용하는 것으로 바꿈
     @GetMapping("/{id}")
-    public ResponseEntity<Member> getMemberById(@PathVariable Long id) {
-        Member member = memberService.getMemberById(id);
-        return new ResponseEntity<>(member, HttpStatus.OK);
+    public ResponseEntity<MemberInfoDTO> getMemberById(@PathVariable Long id) {
+        MemberInfoDTO memberInfoDTO = memberService.getMemberByIdAsDto(id);
+        return new ResponseEntity<>(memberInfoDTO, HttpStatus.OK);
     }
 
-    // 회원 정보 수정
+    // 회원 정보 수정 : 누가 수정하는 것일까 회원이? 관리자가? -> DTO 사용하는 것으로 바꿈
     @PutMapping("/{id}")
-    public ResponseEntity<Member> updateMember(@PathVariable Long id, @RequestBody Member memberDetails) {
-        Member updatedMember = memberService.updateMember(id, memberDetails);
-        return new ResponseEntity<>(updatedMember, HttpStatus.OK);
+    public ResponseEntity<MemberInfoDTO> updateMember(@PathVariable Long id, @RequestBody MemberInfoDTO memberInfoDTO) {
+        MemberInfoDTO updatedMemberInfoDTO = memberService.updateMember(id, memberInfoDTO);
+        return new ResponseEntity<>(updatedMemberInfoDTO, HttpStatus.OK);
     }
+
 
     // 회원 ID로 삭제
     @DeleteMapping("/{id}")

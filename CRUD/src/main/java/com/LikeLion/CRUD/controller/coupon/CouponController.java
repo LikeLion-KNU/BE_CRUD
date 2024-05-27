@@ -1,6 +1,6 @@
 package com.LikeLion.CRUD.controller.coupon;
 
-import com.LikeLion.CRUD.dto.coupon.CouponDTO;
+import com.LikeLion.CRUD.dto.coupon.CouponCreateDTO;
 import com.LikeLion.CRUD.entity.coupon.Coupon;
 import com.LikeLion.CRUD.exception.coupon.CouponNotFoundException;
 import com.LikeLion.CRUD.service.coupon.CouponService;
@@ -19,18 +19,18 @@ public class CouponController {
 
     // 쿠폰 생성
     @PostMapping
-    public Coupon createCoupon(@RequestBody CouponDTO couponDTO) {
-        Coupon coupon = convertToEntity(couponDTO);
+    public Coupon createCoupon(@RequestBody CouponCreateDTO couponCreateDTO) {
+        Coupon coupon = convertToEntity(couponCreateDTO);
         return couponService.createCoupon(coupon);
     }
 
     // CouponDTO를 Coupon 엔티티로 변환하는 메서드
-    private Coupon convertToEntity(CouponDTO couponDTO) {
+    private Coupon convertToEntity(CouponCreateDTO couponCreateDTO) {
         Coupon coupon = new Coupon();
-        coupon.setType(couponDTO.getType());
-        coupon.setDiscount(couponDTO.getDiscount());
-        coupon.setIssueDate(couponDTO.getIssueDate());
-        coupon.setExpirationDate(couponDTO.getExpirationDate());
+        coupon.setType(couponCreateDTO.getType());
+        coupon.setDiscount(couponCreateDTO.getDiscount());
+        coupon.setIssueDate(couponCreateDTO.getIssueDate());
+        coupon.setExpirationDate(couponCreateDTO.getExpirationDate());
         return coupon;
     }
 
