@@ -39,7 +39,7 @@ public class CouponHolderController {
     // 쿠폰 ID로 해당 쿠폰을 보유하고 있는 회원 조회
     @GetMapping("/coupons/{id}")
     public List<Member> findMembersByCouponId(@PathVariable Long id){
-        return couponService.findMembesrByCouponId(id);
+        return couponService.findMembersByCouponId(id);
     }
     // 특정 회원의 (특정) 쿠폰 삭제
     @DeleteMapping()

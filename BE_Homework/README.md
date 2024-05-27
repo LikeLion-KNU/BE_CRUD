@@ -52,7 +52,7 @@ git push origin Team_0_name
 ### Member API
 1. **회원 생성**
     - **엔드포인트**: `POST /members`
-    - **설명**: 새로운 회원을 생성합니다j.
+    - **설명**: 새로운 회원을 생성합니다.
     - **요청 본문**:
         ```json
         {

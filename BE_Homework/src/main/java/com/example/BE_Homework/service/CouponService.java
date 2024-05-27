@@ -68,7 +68,7 @@ public class CouponService {
         couponHoldersRepository.save(couponHolders);
     }
 
-    public List<Member> findMembesrByCouponId(Long couponId){
+    public List<Member> findMembersByCouponId(Long couponId){
         List<CouponHolders> couponHolderList = couponHoldersRepository.findHoldersByCouponId(couponId);
         List<Member> memberList = new ArrayList<>();
         for (CouponHolders couponHolder : couponHolderList){
