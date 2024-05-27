@@ -206,6 +206,9 @@ git push origin Team_0_name
 
 ### Coupon Holders API
 1. **특정 회원에게 쿠폰 할당**
+    - **엔드포인트**: `DELETE /coupon-holders/assign?memberId = 1 & couponId = 1`
+    - **설명**: 특정회원에게 쿠폰 할당
+    - **응답**: coupon-holder 객체를 반환합니다
 
 2. **모든 쿠폰 보유자 조회**
     - **엔드포인트**: `GET /coupon-holders`
