@@ -1,4 +1,6 @@
 package com.example.BE_Homework.dto;
 
-public class MemberReq {
+import com.example.BE_Homework.entity.enumType.Role;
+
+public record MemberReq(String email, String password, Role role, String name, Integer age) {
 }

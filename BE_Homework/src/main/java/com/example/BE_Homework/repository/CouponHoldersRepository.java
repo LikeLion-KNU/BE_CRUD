@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface CouponHoldersRepository extends JpaRepository<CouponHolders, Long> {
-    Optional<List<CouponHolders>> findCouponsByMemberId(Long memberId);
-    Optional<List<CouponHolders>> findCouponsByCouponId(Long couponId);
+    List<CouponHolders> findHoldersByMemberId(Long memberId);
+    List<CouponHolders> findHoldersByCouponId(Long couponId);
 
     void deleteMemberIdAndCouponId(Long memberId, Long couponId);
 }
