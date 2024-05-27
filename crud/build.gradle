@@ -16,7 +16,7 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 	all {
-		exclude group: 'commons-logging', module: 'commons-logging'
+		//exclude group: 'commons-logging', module: 'commons-logging'
 	}
 }
 
@@ -33,6 +33,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 }
 
 tasks.named('test') {

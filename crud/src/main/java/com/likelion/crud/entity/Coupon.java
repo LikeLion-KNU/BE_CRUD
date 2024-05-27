@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Getter
@@ -16,7 +17,8 @@ import java.time.LocalDateTime;
 public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long couponId;
+    @Column(name = "coupon_Id")
+    private Long id;
     private Type type;
     private int discount;
     private LocalDateTime issueDate;

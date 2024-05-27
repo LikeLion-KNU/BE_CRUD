@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 public class CouponRegisterDto {
     @Getter
     public static class Response {
-        private Long couponId;
+        private Long id;
         private Type type;
         private int discount;
         private LocalDateTime issueDate;
         private LocalDateTime expirationDate;
 
         public void update(Coupon coupon) {
-            couponId = coupon.getCouponId();
+            id = coupon.getId();
             type = coupon.getType();
             discount = coupon.getDiscount();
             issueDate = coupon.getIssueDate();

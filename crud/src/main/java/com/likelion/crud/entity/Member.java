@@ -1,11 +1,11 @@
 package com.likelion.crud.entity;
 
+import com.likelion.crud.dto.CouponRegisterDto;
 import com.likelion.crud.dto.MemberUpdateDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,7 +16,8 @@ import lombok.*;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long member_id;
+    @Column(name="member_id")
+    private Long id;
     private String email;
     private String password;
     private Role role;
@@ -24,6 +25,9 @@ public class Member {
     private int age;
     private boolean isAccountExpired;
     private boolean isAccountLocked;
+
+    @OneToMany(mappedBy = "member")
+    private List<CouponHolders> couponHolders;
 
     public void update(MemberUpdateDto.Request memberUpdateDtoRequest) {
         this.email = memberUpdateDtoRequest.getEmail();

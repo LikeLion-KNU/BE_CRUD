@@ -1,16 +1,23 @@
 package com.likelion.crud.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Builder
 public class CouponHolders {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberCouponId;
-    private int couponId;
-    private int memberId;
+    @ManyToOne
+    @JoinColumn(name = "coupon_id")
+    private Coupon coupon;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+
 }
