@@ -43,7 +43,7 @@ public class CouponHoldersService {
         return couponHoldersRepository.save(couponHolders);
     }
 
-    // 모든 쿠폰 보유자 조회
+    // 모든 쿠폰 보유자 조회 -> DTO 적용
     public List<MemberInfoDTO> findAllCouponHolders() {
 
         // 모든 CouponHolders 인스턴스를 가져옵니다.
@@ -65,13 +65,33 @@ public class CouponHoldersService {
     }
 
     // 회원ID로 해당 회원이 보유하고 있는 쿠폰 조회
-    public List<CouponHolders> findCouponsByMemberId(Long memberId) {
-        return couponHoldersRepository.findAllByMemberId(memberId);
+    public List<Coupon> findCouponsByMemberId(Long memberId) {
+        List<CouponHolders> couponHoldersList = couponHoldersRepository.findAllByMemberId(memberId);
+        return couponHoldersList.stream().map(couponHolder -> {
+            Coupon coupons = new Coupon();
+            coupons.setId(couponHolder.getCoupon().getId());
+            coupons.setType(couponHolder.getCoupon().getType());
+            coupons.setDiscount(couponHolder.getCoupon().getDiscount());
+            coupons.setIssueDate(couponHolder.getCoupon().getIssueDate());
+            coupons.setExpirationDate(couponHolder.getCoupon().getExpirationDate());
+            return coupons;
+        }).collect(Collectors.toList());
     }
 
-    // 쿠폰ID로 해당 쿠폰을 보유하고 있는 회원 조회
-    public List<CouponHolders> findMembersByCouponId(Long couponId) {
-        return couponHoldersRepository.findAllByCouponId(couponId);
+    // 쿠폰ID로 해당 쿠폰을 보유하고 있는 회원 조회 -> DTO 적용
+    public List<MemberInfoDTO> findMembersByCouponId(Long couponId) {
+        List<CouponHolders> couponHoldersList = couponHoldersRepository.findAllByCouponId(couponId);
+
+        return couponHoldersList.stream().map(couponHolder -> {
+            MemberInfoDTO dto = new MemberInfoDTO();
+            dto.setEmail(couponHolder.getMember().getEmail());
+            dto.setRole(couponHolder.getMember().getRole());
+            dto.setName(couponHolder.getMember().getName());
+            dto.setAge(couponHolder.getMember().getAge());
+            dto.setIsAccountExpired(couponHolder.getMember().getIsAccountExpired());
+            dto.setIsAccountLocked(couponHolder.getMember().getIsAccountLocked());
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     // 특정 회원의 쿠폰 삭제

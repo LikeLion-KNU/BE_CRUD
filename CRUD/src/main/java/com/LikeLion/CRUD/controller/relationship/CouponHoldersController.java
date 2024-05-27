@@ -1,6 +1,7 @@
 package com.LikeLion.CRUD.controller.relationship;
 
 import com.LikeLion.CRUD.dto.member.MemberInfoDTO;
+import com.LikeLion.CRUD.entity.coupon.Coupon;
 import com.LikeLion.CRUD.entity.relation.CouponHolders;
 import com.LikeLion.CRUD.service.relationship.CouponHoldersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +24,17 @@ public class CouponHoldersController {
         return ResponseEntity.ok().body(allCouponHolders);
     }
 
-    // 회원ID로 해당 회원이 보유하고 있는 쿠폰 조회 -> DTO 사용
+    // 회원ID로 해당 회원이 보유하고 있는 쿠폰 조회
     @GetMapping("/member/{memberId}")
-    public ResponseEntity<List<CouponHolders>> getCouponsByMemberId(@PathVariable Long memberId) {
+    public ResponseEntity<List<Coupon>> getCouponsByMemberId(@PathVariable Long memberId) {
         return ResponseEntity.ok().body(couponHoldersService.findCouponsByMemberId(memberId));
     }
 
-    // 쿠폰ID로 해당 쿠폰을 보유하고 있는 회원 조회
+    // 쿠폰ID로 해당 쿠폰을 보유하고 있는 회원 조회 -> DTO 사용
     @GetMapping("/coupon/{couponId}")
-    public ResponseEntity<List<CouponHolders>> getMembersByCouponId(@PathVariable Long couponId) {
-        return ResponseEntity.ok().body(couponHoldersService.findMembersByCouponId(couponId));
+    public ResponseEntity<List<MemberInfoDTO>> getMembersByCouponId(@PathVariable Long couponId) {
+        List<MemberInfoDTO> members = couponHoldersService.findMembersByCouponId(couponId);
+        return ResponseEntity.ok().body(members);
     }
 
     // 특정 회원에게 쿠폰 할당
