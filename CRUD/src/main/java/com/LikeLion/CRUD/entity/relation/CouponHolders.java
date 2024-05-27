@@ -3,7 +3,11 @@ package com.LikeLion.CRUD.entity.relation;
 import com.LikeLion.CRUD.entity.coupon.Coupon;
 import com.LikeLion.CRUD.entity.member.Member;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "coupon_holders")
 public class CouponHolders {
