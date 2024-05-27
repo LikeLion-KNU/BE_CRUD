@@ -1,4 +1,4 @@
-package com.LikeLion.CRUD.Entity.Coupon;
+package com.LikeLion.CRUD.entity.coupon;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

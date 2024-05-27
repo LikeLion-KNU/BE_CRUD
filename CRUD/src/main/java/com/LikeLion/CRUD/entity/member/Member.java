@@ -1,4 +1,4 @@
-package com.LikeLion.CRUD.Entity.Member;
+package com.LikeLion.CRUD.entity.member;
 
 import jakarta.persistence.*;
 

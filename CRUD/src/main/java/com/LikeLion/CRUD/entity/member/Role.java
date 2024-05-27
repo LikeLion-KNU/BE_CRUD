@@ -1,6 +1,5 @@
-package com.LikeLion.CRUD.Entity.Member;
+package com.LikeLion.CRUD.entity.member;
 
-import com.LikeLion.CRUD.Entity.Coupon.CouponType;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import java.util.stream.Stream;

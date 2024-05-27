@@ -1,7 +1,7 @@
-package com.LikeLion.CRUD.Entity.Relation;
+package com.LikeLion.CRUD.entity.relation;
 
-import com.LikeLion.CRUD.Entity.Coupon.Coupon;
-import com.LikeLion.CRUD.Entity.Member.Member;
+import com.LikeLion.CRUD.entity.coupon.Coupon;
+import com.LikeLion.CRUD.entity.member.Member;
 import jakarta.persistence.*;
 
 @Entity
