@@ -71,6 +71,184 @@ git push origin Team_0_name
     - **설명**: 모든 회원 목록을 조회합니다.
     - **응답**: Member 객체 리스트.
 3. ... (위와 같은 형식으로 만들어 주시면 됩니다!)
+
+### Member API
+1. **회원 생성**
+    - **엔드포인트**: `POST /member`
+    - **설명**: 새로운 회원을 생성합니다.
+    - **요청 본문**:
+        ```json
+       {
+          "email": "string",
+          "password": "string",
+          "role": "ADMIN",
+          "name": "string",
+          "age": 0,
+          "isAccountExpired": true,
+          "isAccountLocked": true
+        }
+        ```
+    - **응답**: `member_id`를 포함한 Member 객체.
+
+2. **회원 전체 조회**
+    - **엔드포인트**: `GET /member`
+    - **설명**: 모든 회원 목록을 조회합니다.
+    - **응답**: MemberDTO 객체 리스트.
+      ```json
+       [
+        {
+          "email": "string",
+          "role": "ADMIN",
+          "name": "string",
+          "age": 0,
+          "isAccountExpired": true,
+          "isAccountLocked": true
+        }
+      ]
+        ```
+    
+3. **회원 ID로 조회**
+    - **엔드포인트**: `GET /member/{id}`
+    - **설명**: 특정 회원을 조회합니다.
+    - **응답**: MemberDTO 객체
+      ```json
+       {
+          "email": "string",
+          "role": "ADMIN",
+          "name": "string",
+          "age": 0,
+          "isAccountExpired": true,
+          "isAccountLocked": true
+        }
+        ```
+
+4. **회원 정보 수정**
+    - **엔드포인트**: `PUT /member/{id}`
+    - **설명**: 특정 회원 정보를 수정합니다.
+    - **요청 본문**:
+        ```json
+       {
+          "email": "string",,
+          "role": "ADMIN",
+          "name": "string",
+          "age": 0,
+          "isAccountExpired": true,
+          "isAccountLocked": true
+        }
+        ```
+    - **응답**: MemberDTO 객체.
+       ```json
+         {
+            "email": "string",,
+            "role": "ADMIN",
+            "name": "string",
+            "age": 0,
+            "isAccountExpired": true,
+            "isAccountLocked": true
+          }
+        ```
+
+5. **회원 ID로 삭제**
+   - **엔드포인트**: `DELETE /member/{id}`
+    - **설명**: 특정 회원을 삭제합니다.
+    - **응답**: 200 ok
+   
+
+### Coupon API
+1. **쿠폰 생성**
+    - **엔드포인트**: `POST /coupon`
+    - **설명**: 쿠폰을 생성합니다
+    - **요청 본문**:
+        ```json
+          {
+            "type": "PERCENTAGE",
+            "discount": 0,
+            "issueDate": "2024-05-27T14:47:12.496Z",
+            "expirationDate": "2024-05-27T14:47:12.496Z"
+          }
+        ```
+    - **응답**: `coupon_id`를 포함한 Coupon 객체.
+
+2. **모든 쿠폰 조회**
+    - **엔드포인트**: `GET /coupon`
+    - **설명**: 모든 쿠폰을 조회합니다
+    - **응답**: CouponDTO 리스트 객체
+      ```json
+          [
+            {
+              "id": 0,
+              "type": "PERCENTAGE",
+              "discount": 0,
+              "issueDate": "2024-05-27T14:49:27.399Z",
+              "expirationDate": "2024-05-27T14:49:27.399Z"
+            }
+          ]
+        ```
+3. **쿠폰 정보 수정**
+    - **엔드포인트**: `PUT /coupon/{id}`
+    - **설명**: 특정 쿠폰 정보를 수정합니다.
+    - **요청 본문**:
+        ```json
+        {
+          "id": 0,
+          "type": "PERCENTAGE",
+          "discount": 0,
+          "issueDate": "2024-05-27T14:51:07.053Z",
+          "expirationDate": "2024-05-27T14:51:07.053Z"
+        }
+        ```
+    - **응답**:Coupon 객체.
+
+4. **쿠폰 삭제**
+    - **엔드포인트**: `DELETE /coupon/{id}`
+    - **설명**: 특정 쿠폰을 삭제합니다.
+    - **응답**: 200 ok
+
+### Coupon Holders API
+1. **특정 회원에게 쿠폰 할당**
+
+2. **모든 쿠폰 보유자 조회**
+    - **엔드포인트**: `GET /coupon-holders`
+    - **설명**: 모든 쿠폰 보유자를 조회합니다
+    - **응답**: MemberDTO 리스트를 반환합니다.
+      ```json
+        [
+          {
+            "email": "string",
+            "role": "ADMIN",
+            "name": "string",
+            "age": 0,
+            "isAccountExpired": true,
+            "isAccountLocked": true
+          }
+        ]
+        ```
+3. **회원ID로 해당 회원이 보유하고 있는 쿠폰 조회**
+    - **엔드포인트**: `PUT /coupon-holders/member/{memberId}`
+    - **설명**: 특정 회원이 보유하고있는 쿠폰을 조회합니다.
+    - **응답**: Coupon 객체 리스트
+
+4. **쿠폰ID로 해당 쿠폰을 보유하고 있는 회원 조회**
+    - **엔드포인트**: `PUT /coupon-holders/coupon/{couponId}`
+    - **설명**: 특정 쿠폰을 보유하고있는 회원들을 조회합니다.
+    - **응답**: MemberDTO 객체 리스트.
+       ```json
+        [
+          {
+            "email": "string",
+            "role": "ADMIN",
+            "name": "string",
+            "age": 0,
+            "isAccountExpired": true,
+            "isAccountLocked": true
+          }
+        ]
+        ```
+5. **특정 회원의 쿠폰 삭제**
+    - **엔드포인트**: `DELETE /coupon-holders/delete?memberId = 1 & couponId = 1`
+    - **설명**: 특정회원의 특정 쿠폰을 삭제합니다.
+    - **응답**: 200 ok
+
 ---
 ### 5. 노션에 본인 브랜치 URL 제출
 ✅ [본인 브랜치 URL 제출 링크](https://www.notion.so/CRUD-f59053587cd74f4ab5fca7841d5fac83?pvs=4)
