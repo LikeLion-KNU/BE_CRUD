@@ -1,7 +1,11 @@
 package com.LikeLion.CRUD.entity.member;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "member")
 public class Member {
