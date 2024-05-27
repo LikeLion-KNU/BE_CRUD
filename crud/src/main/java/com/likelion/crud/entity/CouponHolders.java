@@ -10,7 +10,7 @@ import lombok.Setter;
 @Entity
 public class CouponHolders {
     @Id
-    private Long member_coupon_id;
-    private int coupon_id;
-    private int member_id;
+    private Long memberCouponId;
+    private int couponId;
+    private int memberId;
 }

@@ -1,17 +1,30 @@
 package com.likelion.crud.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import com.likelion.crud.dto.CouponUpdateDto;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Coupon {
     @Id
-    private int coupon_id;
-    private Enum type;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long couponId;
+    private Type type;
     private int discount;
+    private LocalDateTime issueDate;
+    private LocalDateTime expirationDate;
 
+    public void update(CouponUpdateDto.Request couponUpdateDtoRequest) {
+        this.type = couponUpdateDtoRequest.getType();
+        this.discount = couponUpdateDtoRequest.getDiscount();
+        this.expirationDate = couponUpdateDtoRequest.getExpirationDate();
+    }
 }

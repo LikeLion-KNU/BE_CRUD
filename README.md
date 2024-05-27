@@ -36,3 +36,10 @@
    - **설명**: ID를 사용해 회원 정보 삭제.
    - **응답**: None
 ---
+
+### Coupon API
+
+
+---
+
+### CouponHolder API
