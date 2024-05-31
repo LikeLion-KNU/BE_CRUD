@@ -1,6 +1,6 @@
-package com.example.BE_Homework.entity;
+package com.example.BE_Homework.domain.member.entity;
 
-import com.example.BE_Homework.entity.enumType.Role;
+import com.example.BE_Homework.domain.couponholders.entity.CouponHolders;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Member {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private Long id;
 
     private String email;
 

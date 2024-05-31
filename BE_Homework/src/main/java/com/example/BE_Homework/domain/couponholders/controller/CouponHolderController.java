@@ -1,15 +1,11 @@
-package com.example.BE_Homework.controller;
+package com.example.BE_Homework.domain.couponholders.controller;
 
-import com.example.BE_Homework.entity.Coupon;
-import com.example.BE_Homework.entity.CouponHolders;
-import com.example.BE_Homework.entity.Member;
-import com.example.BE_Homework.service.CouponService;
-import com.example.BE_Homework.service.MemberService;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.example.BE_Homework.domain.coupon.entity.Coupon;
+import com.example.BE_Homework.domain.couponholders.entity.CouponHolders;
+import com.example.BE_Homework.domain.member.entity.Member;
+import com.example.BE_Homework.domain.coupon.service.CouponService;
+import com.example.BE_Homework.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

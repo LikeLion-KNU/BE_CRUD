@@ -1,9 +1,9 @@
-package com.example.BE_Homework.controller;
+package com.example.BE_Homework.domain.member.controller;
 
 
-import com.example.BE_Homework.dto.MemberReq;
-import com.example.BE_Homework.entity.Member;
-import com.example.BE_Homework.service.MemberService;
+import com.example.BE_Homework.domain.member.dto.MemberReq;
+import com.example.BE_Homework.domain.member.entity.Member;
+import com.example.BE_Homework.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

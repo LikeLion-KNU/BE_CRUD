@@ -1,10 +1,8 @@
-package com.example.BE_Homework.service;
+package com.example.BE_Homework.domain.member.service;
 
-import com.example.BE_Homework.dto.MemberReq;
-import com.example.BE_Homework.entity.Member;
-import com.example.BE_Homework.repository.CouponHoldersRepository;
-import com.example.BE_Homework.repository.CouponRepository;
-import com.example.BE_Homework.repository.MemberRepository;
+import com.example.BE_Homework.domain.member.dto.MemberReq;
+import com.example.BE_Homework.domain.member.entity.Member;
+import com.example.BE_Homework.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +21,8 @@ public class MemberService {
                 .role(memberReq.role())
                 .name(memberReq.name())
                 .age(memberReq.age())
+                .isAccountExpired(true)
+                .isAccountLocked(false)
                 .build();
         return memberRepository.save(member);
     }
@@ -40,7 +40,7 @@ public class MemberService {
     }
 
     public Member updateMember(Member member){
-        Member existMember = memberRepository.findById(member.getMemberId()).orElseThrow(() -> new IllegalArgumentException("Invalid Member Id"));
+        Member existMember = memberRepository.findById(member.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid Member Id"));
 
         existMember.setEmail(member.getEmail());
         existMember.setPassword(member.getPassword());

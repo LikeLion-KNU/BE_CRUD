@@ -1,21 +1,19 @@
-package com.example.BE_Homework.service;
+package com.example.BE_Homework.domain.coupon.service;
 
-import com.example.BE_Homework.dto.CouponReq;
-import com.example.BE_Homework.entity.Coupon;
-import com.example.BE_Homework.entity.CouponHolders;
-import com.example.BE_Homework.entity.Member;
-import com.example.BE_Homework.repository.CouponHoldersRepository;
-import com.example.BE_Homework.repository.CouponRepository;
-import com.example.BE_Homework.repository.MemberRepository;
-import lombok.NoArgsConstructor;
+import com.example.BE_Homework.domain.coupon.dto.CouponReadRequestDto;
+import com.example.BE_Homework.domain.coupon.dto.CouponUpdateRequestDto;
+import com.example.BE_Homework.domain.coupon.entity.Coupon;
+import com.example.BE_Homework.domain.couponholders.entity.CouponHolders;
+import com.example.BE_Homework.domain.member.entity.Member;
+import com.example.BE_Homework.domain.couponholders.repository.CouponHoldersRepository;
+import com.example.BE_Homework.domain.coupon.repository.CouponRepository;
+import com.example.BE_Homework.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.lang.management.LockInfo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,34 +22,24 @@ public class CouponService {
     private final CouponRepository couponRepository;
     private final CouponHoldersRepository couponHoldersRepository;
 
-    public Coupon createCoupon(CouponReq couponReq){
-        Coupon coupon = Coupon.builder()
-                .type(couponReq.couponType())
-                .discount(couponReq.discount())
-                .issueDate(LocalDateTime.now())
-                .expirationDate(couponReq.expirationDate())
-                .build();
-        return couponRepository.save(coupon);
+    public Coupon createCoupon(CouponReadRequestDto couponReadRequestDto){
+        return couponRepository.save(Coupon.toEntity(couponReadRequestDto));
     }
 
     public List<Coupon> getAllCoupons(){
         return couponRepository.findAll();
     }
 
+    public Coupon updateCoupon(CouponUpdateRequestDto couponUpdateRequestDto){
+        Coupon coupon = couponRepository.findById(couponUpdateRequestDto.id()).orElseThrow(() -> new IllegalArgumentException("Invalid Coupon Id"));
+        coupon.update(couponUpdateRequestDto);
+        return couponRepository.save(coupon);
+    }
     public void deleteCoupon(Long id){
-        couponRepository.deleteById(id);
+        couponRepository.deleteCouponById(id);
     }
 
-    public Coupon updateCoupon(Coupon coupon){
-        Coupon existCoupon = couponRepository.findById(coupon.getCouponId()).orElseThrow(() -> new IllegalArgumentException("Invalid Coupon Id"));
-
-        existCoupon.setType(coupon.getType());
-        existCoupon.setDiscount(coupon.getDiscount());
-        existCoupon.setExpirationDate(coupon.getExpirationDate());
-        existCoupon.setIssueDate(LocalDateTime.now());
-
-        return couponRepository.save(existCoupon);
-    }
+    // 여기부턴 Holder 인가
 
     public List<CouponHolders> getAllCouponHolders(){
         return couponHoldersRepository.findAll();
@@ -69,7 +57,7 @@ public class CouponService {
     }
 
     public List<Member> findMembersByCouponId(Long couponId){
-        List<CouponHolders> couponHolderList = couponHoldersRepository.findHoldersByCouponId(couponId);
+        List<CouponHolders> couponHolderList = couponHoldersRepository.findCouponHoldersByCouponId(couponId);
         List<Member> memberList = new ArrayList<>();
         for (CouponHolders couponHolder : couponHolderList){
             memberList.add(couponHolder.getMember());
@@ -78,7 +66,7 @@ public class CouponService {
     }
 
     public List<Coupon> findCouponsByMemberId(Long memberId){
-        List<CouponHolders> couponHolderList = couponHoldersRepository.findHoldersByMemberId(memberId);
+        List<CouponHolders> couponHolderList = couponHoldersRepository.findCouponHoldersByMemberId(memberId);
         List<Coupon> couponList = new ArrayList<>();
         for (CouponHolders couponHolder : couponHolderList){
             couponList.add(couponHolder.getCoupon());
@@ -87,7 +75,7 @@ public class CouponService {
     }
 
     public void deleteCouponFromMember(Long couponId, Long memberId){
-        couponHoldersRepository.deleteMemberIdAndCouponId(couponId, memberId);
+        couponHoldersRepository.deleteByMemberIdAndCouponId(couponId, memberId);
     }
 
 }
